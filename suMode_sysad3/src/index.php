@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
   <div class="container">
-    <h1 class="text-center mt-5">AlphaQ - index to view/update MoMs</h1>
+    <h1 class="text-center mt-5">AlphaQ - Login to view/update MoMs</h1>
     <form action="/index.php" method="POST">
       <div class="mb-3">
         <label for="uname" class="form-label">Username</label>
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
       </div>
-      <button type="submit" class="btn btn-primary">index</button>
+      <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <?php
     if ($error) {
