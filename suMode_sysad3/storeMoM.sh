@@ -31,21 +31,40 @@ getMom(){
 	fi
 }
 
-#Getting the indices of these dates in meetdates array
-x=$(echo ${meetDates[@]/$1//} | cut -f 1 -d/ | wc -w | tr -d ' ')
-y=$(echo ${meetDates[@]/$2//} | cut -f 1 -d/ | wc -w | tr -d ' ')
-
-if [[ $x -eq $exceed || $y -eq $exceed ]] #checking whether meet was there on the date passed as command line paramter
+if expr "$1" ">=" "${meetDates[0]}" > /dev/null && expr "$2" "<=" "${meetDates[$exceed]}" > /dev/null
 then
-	echo Sorry, wrong input.
+		for (( z=0; z<$exceed; z++ ))
+		do
+				if expr "${meetDates[$z]}" ">=" "$1" > /dev/null
+				then
+						x=$z
+						break
+				fi
+		done
+		for (( z=0; z<$exceed; z++ ))
+		do
+				if expr "${meetDates[$z]}" ">=" "$2" > /dev/null
+				then
+						if expr "${meetDates[$z]}" "=" "$2" > /dev/null
+						then
+								y=$z
+								break
+						else
+								y=$[z-1]
+								break
+						fi
+				fi
+		done
+		lim=$[$y+1]
+		for (( z=$x; z<$lim; z++ ))
+		do
+				getMom ${meetDates[$z]}
+		done
+		echo Table Updated sucessfully
 else
-	lim=$[$y+1]
-	for (( z=$x; z<$lim; z++ ))
-	do
-		getMom ${meetDates[$z]}
-	done
-	echo Table updated sucessfully!
+		echo Sorry, wrong input.
 fi
+
 
 #Writing the MoM of each date with username into SQL database
 python3.9 /root/initialize.py 2> /dev/null
