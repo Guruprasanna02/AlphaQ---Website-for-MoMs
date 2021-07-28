@@ -40,6 +40,11 @@ for i in range(1, 31):
         uname = "sysAd_"+str(i)
         val2 = (uname, "superuserpass")
         mycursor.execute(command2, val2)
+
+command0 = "INSERT INTO allUsers (user, password) VALUES (%s, %s)"
+val0 = ("jay_jay", "superuserpass")
+mycursor.execute(command0, val0)
+        
 mydb.commit()
 mydb = mysql.connector.connect(
     host="db", port="3306", user="root", passwd="password")
