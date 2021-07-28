@@ -13,6 +13,7 @@ do
 	meetDates+=($p)
 done < tempDates.txt
 exceed=${#meetDates[@]}
+exceed=$[exceed-1]
 
 #Generates an array with all last joined user with date (between given paramters)
 lastJoined=()
