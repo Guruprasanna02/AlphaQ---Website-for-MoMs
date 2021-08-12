@@ -23,6 +23,8 @@ services:
             context: .
             dockerfile: Dockerfile-py
         image: mom2db
+        volumes: 
+            - data:/root/
 volumes:
     db_data:
-
+    data:
